@@ -71,7 +71,7 @@ function isZigbangUrl(url: string): boolean {
 }
 
 function isDabangUrl(url: string): boolean {
-    return /dabang\.com/i.test(url) || /다방/i.test(url);
+    return /dabang\.com/i.test(url) || /dabangapp\.com/i.test(url) || /다방/i.test(url);
 }
 
 // ─── 네이버 부동산 API 스크래퍼 ─────────────────────────────────

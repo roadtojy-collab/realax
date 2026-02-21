@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:utils": "node scripts/test-utils.mjs",
+    "test": "npm run test:utils && node scripts/test-api.mjs",
+    "test:api": "node scripts/test-api.mjs",
+    "test:open": "node scripts/open-for-test.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

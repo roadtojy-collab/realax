@@ -18,6 +18,7 @@ export async function POST(req: Request) {
         const content = await generatePropertyContent(propertyData);
 
         // DB 저장 옵션
+
         if (saveToDb) {
             await prisma.property.create({
                 data: {
@@ -39,6 +40,7 @@ export async function POST(req: Request) {
                 },
             });
         }
+
 
         return NextResponse.json({
             success: true,

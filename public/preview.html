@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RealAX - 테스트 프리뷰</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-card: #1a2030;
+      --border-color: #2a3040;
+      --accent-blue: #4f8ef7;
+      --accent-green: #22d3a0;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Pretendard', -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+    .preview-badge {
+      position: fixed;
+      top: 70px;
+      right: 16px;
+      z-index: 100;
+      background: rgba(234,179,8,0.2);
+      border: 1px solid rgba(234,179,8,0.5);
+      color: #fbbf24;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    header {
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(to right, rgba(13,17,23,0.95), rgba(22,27,34,0.95));
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      height: 60px;
+      gap: 12px;
+    }
+    .logo {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, #4f8ef7, #6c63ff);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: white;
+    }
+    main { max-width: 820px; margin: 0 auto; padding: 40px 24px 80px; }
+    .hero { text-align: center; margin-bottom: 48px; }
+    .hero-badge {
+      display: inline-block; margin-bottom: 16px;
+      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.25);
+      border-radius: 100px; padding: 6px 16px;
+      font-size: 12px; font-weight: 600; color: var(--accent-blue); letter-spacing: 0.05em;
+    }
+    .glass-card {
+      background: rgba(26, 32, 48, 0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    input[type="url"], input[type="text"], select {
+      width: 100%;
+      background: rgba(13,17,23,0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #4f8ef7, #6c63ff);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .tabs {
+      display: flex;
+      gap: 2px;
+      background: rgba(13,17,23,0.6);
+      border-radius: 10px;
+      padding: 4px;
+    }
+    .tabs button {
+      padding: 7px 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      background: transparent;
+      color: var(--text-secondary);
+    }
+    .tabs button.active {
+      background: linear-gradient(135deg, #4f8ef7, #6c63ff);
+      color: white;
+    }
+    .content-box {
+      background: rgba(13,17,23,0.8);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      white-space: pre-line;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      min-height: 120px;
+    }
+    .result-card {
+      background: linear-gradient(135deg, rgba(34,211,160,0.05) 0%, rgba(79,142,247,0.05) 100%);
+      border: 1px solid rgba(34,211,160,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .result-header {
+      padding: 20px 24px 0;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="preview-badge">🧪 테스트 프리뷰 (실제 API 호출 없음)</div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">R</div>
+      <span style="font-weight: 700; font-size: 18px;">Real<span style="color: var(--accent-blue);">AX</span></span>
+      <span style="margin-left: 8px; font-size: 11px; font-weight: 600; background: linear-gradient(135deg, #4f8ef7, #22d3a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AI 매물 자동화</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="hero-badge">AI 파워드 공인중개사 도구</div>
+      <h1 style="font-size: 40px; font-weight: 800; margin: 0 0 16px; line-height: 1.2;">
+        매물 URL 하나로<br />
+        <span style="background: linear-gradient(135deg, #4f8ef7, #22d3a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">3종 콘텐츠를 자동 생성</span>
+      </h1>
+      <p style="color: var(--text-secondary); font-size: 16px; margin: 0; line-height: 1.6;">
+        매물 설명 · 블로그/카페 홍보글 · 문자/단톡 문구<br />
+        10분이 걸리던 작업을 <strong style="color: var(--text-primary);">2분</strong>으로 줄여드립니다
+      </p>
+    </div>
+
+    <!-- 입력 화면 프리뷰 -->
+    <div class="glass-card">
+      <p class="section-title">📥 입력 화면 (테스트용)</p>
+      <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+        <input type="url" placeholder="https://m.land.naver.com/... 또는 Ctrl+V로 스크린샷 붙여넣기" style="flex: 1;" readonly />
+        <button type="button" class="btn-primary" style="min-width: 110px;">✨ 불러오기</button>
+      </div>
+      <div style="text-align: center;">
+        <button type="button" style="background: none; border: none; color: var(--text-secondary); font-size: 13px; cursor: pointer; text-decoration: underline;">직접 입력하기</button>
+      </div>
+    </div>
+
+    <!-- 생성 결과 프리뷰 (3종 콘텐츠) -->
+    <p class="section-title">📤 생성 결과 프리뷰 (샘플 데이터)</p>
+    <div class="result-card">
+      <div class="result-header">
+        <span style="font-size: 18px;">✅</span>
+        <span style="font-weight: 700; font-size: 15px; color: var(--accent-green); flex: 1;">3종 콘텐츠 생성 완료</span>
+        <div class="tabs" id="tabs">
+          <button type="button" class="active" data-tab="description">🏠 매물 설명</button>
+          <button type="button" data-tab="blog">📝 블로그/카페</button>
+          <button type="button" data-tab="sms">💬 문자/단톡</button>
+        </div>
+      </div>
+      <div style="padding: 20px 24px;">
+        <div class="content-box" id="content"></div>
+        <button type="button" class="btn-primary" style="margin-top: 12px;">📋 복사하기</button>
+      </div>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 12px; color: var(--text-secondary);">
+      이 페이지는 실제 서버 없이 UI만 확인하는 테스트 프리뷰입니다. 실제 동작은 <code>npm run dev</code> 후 <a href="/" style="color: var(--accent-blue);">http://localhost:3000</a> 에서 확인하세요.
+    </p>
+  </main>
+
+  <script>
+    const sample = {
+      description: '역세권 신축 오피스텔 풀옵션 매물입니다.\n교통이 편리하고 생활 인프라가 잘 갖춰진 역삼동 소재이며, 남향으로 채광과 환기가 좋습니다. 풀옵션 비치로 즉시 입주 가능합니다.',
+      blogContent: '안녕하세요~ 오늘 소개해 드릴 매물은 역삼역 도보 2분 거리의 신축 오피스텔이에요!\n\n풀옵션에 남향이라 햇빛도 잘 들어오고, 바로 입주 가능한 매물이라 관심 있으신 분들은 연락 주세요~ 😊\n\n#역삼역 #오피스텔 #풀옵션 #신축',
+      smsContent: '[역삼역 2분] 신축 오피스텔 풀옵션, 남향 즉시입주 가능합니다. 문의 주시면 상세 안내 드리겠습니다.'
+    };
+
+    const contentEl = document.getElementById('content');
+    const tabsEl = document.getElementById('tabs');
+
+    function show(tab) {
+      contentEl.textContent = sample[tab];
+      tabsEl.querySelectorAll('button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+      });
+    }
+
+    tabsEl.addEventListener('click', (e) => {
+      if (e.target.dataset.tab) show(e.target.dataset.tab);
+    });
+
+    show('description');
+  </script>
+</body>
+</html>
