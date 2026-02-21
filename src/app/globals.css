@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-card: #1a2030;
+  --border-color: #2a3040;
+  --accent-blue: #4f8ef7;
+  --accent-blue-glow: rgba(79, 142, 247, 0.3);
+  --accent-green: #22d3a0;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --ai-fill-bg: rgba(79, 142, 247, 0.08);
+  --ai-fill-border: rgba(79, 142, 247, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  min-height: 100vh;
+}
+
+/* AI 자동 입력 필드 하이라이팅 */
+.ai-filled {
+  background: var(--ai-fill-bg) !important;
+  border-color: var(--ai-fill-border) !important;
+  animation: ai-highlight-in 0.5s ease-out;
+}
+
+@keyframes ai-highlight-in {
+  from {
+    background: rgba(79, 142, 247, 0.25);
+    transform: scale(1.01);
+  }
+
+  to {
+    background: var(--ai-fill-bg);
+    transform: scale(1);
+  }
+}
+
+/* 스켈레톤 로딩 애니메이션 */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      var(--bg-secondary) 25%,
+      var(--bg-card) 50%,
+      var(--bg-secondary) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+/* 글래스모피즘 카드 */
+.glass-card {
+  background: rgba(26, 32, 48, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+/* 네온 글로우 버튼 */
+.btn-primary {
+  background: linear-gradient(135deg, #4f8ef7 0%, #6c63ff 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px var(--accent-blue-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 30px var(--accent-blue-glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 커스텀 스크롤바 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}

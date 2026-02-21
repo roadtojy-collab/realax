@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Property {
+  id           String   @id @default(cuid())
+  sourceUrl    String?  // 원본 매물 URL
+  title        String
+  dealType     String   // SALE(매매) | JEONSE(전세) | MONTHLY(월세)
+  propertyType String   // APARTMENT | OFFICETEL | VILLA | ONEROOM | TWOROOM | SHOP
+  region       String?  // 주소 (예: 서울시 강남구 역삼동)
+  areaM2       Float?   // 면적 (m²)
+  floor        String?  // 층수 정보
+  deposit      Int?     // 보증금 (만원 단위)
+  monthlyRent  Int?     // 월세 (만원 단위)
+  price        Int?     // 매매가 (만원 단위)
+  options      String   @default("[]") // JSON array as string
+  highlights   String?  // 핵심 강점 요약
+  description  String?  // AI 생성 매물 설명
+  blogContent  String?  // AI 생성 블로그/카페 홍보글
+  smsContent   String?  // AI 생성 문자/단톡 문구
+  isAiFilled   Boolean  @default(false) // URL 자동입력 여부
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
