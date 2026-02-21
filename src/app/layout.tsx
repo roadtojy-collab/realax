@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import ApiKeySettings from '@/components/ApiKeySettings';
+
 
 export const metadata: Metadata = {
   title: 'RealAX - 부동산 AI 콘텐츠 자동화',
@@ -29,32 +29,30 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           <header style={{
             borderBottom: '1px solid var(--border-color)',
-            background: 'linear-gradient(to right, rgba(13,17,23,0.95), rgba(22,27,34,0.95))',
-            backdropFilter: 'blur(12px)',
+            background: 'var(--bg-secondary)',
+            height: '60px',
+            display: 'flex',
+            alignItems: 'center',
             position: 'sticky',
             top: 0,
             zIndex: 50,
           }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', height: '60px', gap: '12px' }}>
-                <div style={{
-                  width: '32px', height: '32px',
-                  background: 'linear-gradient(135deg, #4f8ef7, #6c63ff)',
-                  borderRadius: '8px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '16px', fontWeight: 800, color: 'white',
-                }}>R</div>
-                <span style={{ fontWeight: 700, fontSize: '18px', color: 'var(--text-primary)' }}>
-                  Real<span style={{ color: 'var(--accent-blue)' }}>AX</span>
-                </span>
-                <span style={{
-                  marginLeft: '8px', fontSize: '11px', fontWeight: 600,
-                  background: 'linear-gradient(135deg, #4f8ef7, #22d3a0)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                  letterSpacing: '0.05em',
-                }}>AI 매물 자동화</span>
-                <ApiKeySettings />
-              </div>
+            <div style={{ maxWidth: '820px', margin: '0 auto', width: '100%', padding: '0 24px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{
+                width: '32px', height: '32px',
+                background: 'var(--accent-blue)',
+                borderRadius: '8px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: '16px', fontWeight: 800, color: 'white',
+              }}>R</div>
+              <span style={{ fontWeight: 700, fontSize: '18px', color: 'var(--text-primary)' }}>
+                Real<span style={{ color: 'var(--accent-blue)' }}>AX</span>
+              </span>
+              <span style={{
+                marginLeft: '8px', fontSize: '11px', fontWeight: 600,
+                color: 'var(--text-secondary)',
+                letterSpacing: '0.05em',
+              }}>AI 매물 자동화</span>
             </div>
           </header>
           <main style={{ flex: 1 }}>

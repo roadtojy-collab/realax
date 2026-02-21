@@ -1,12 +1,14 @@
 import OpenAI from 'openai';
-import { getStoredApiKey } from '@/app/api/settings/route';
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
 function getOpenAI(): OpenAI {
-    const apiKey = getStoredApiKey();
-    if (!apiKey) {
+    if (!process.env.OPENAI_API_KEY) {
         throw new Error('API_KEY_MISSING');
     }
-    return new OpenAI({ apiKey });
+    return openai;
 }
 
 export interface ParsedProperty {
@@ -153,13 +155,14 @@ export async function generatePropertyContent(property: ParsedProperty): Promise
         SHOP: '상가',
     };
 
+    const options = Array.isArray(property.options) ? property.options : [];
     const summary = `
 물건 유형: ${propertyTypeMap[property.property_type || ''] || '미확인'}
 거래 형태: ${dealTypeMap[property.deal_type || ''] || '미확인'}
 위치: ${property.region || '미확인'}
 면적: ${property.area_m2 ? `${property.area_m2}m²` : '미확인'}
 층수: ${property.floor || '미확인'}
-옵션: ${property.options.length > 0 ? property.options.join(', ') : '없음'}
+옵션: ${options.length > 0 ? options.join(', ') : '없음'}
 핵심 포인트: ${property.highlights || '없음'}
   `.trim();
 

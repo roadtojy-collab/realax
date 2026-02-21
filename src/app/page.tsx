@@ -89,23 +89,15 @@ export default function Home() {
     <div style={{ maxWidth: '820px', margin: '0 auto', padding: '40px 24px 80px' }}>
       {/* 히어로 섹션 */}
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-        <div style={{
-          display: 'inline-block', marginBottom: '16px',
-          background: 'rgba(79,142,247,0.1)', border: '1px solid rgba(79,142,247,0.25)',
-          borderRadius: '100px', padding: '6px 16px',
-          fontSize: '12px', fontWeight: 600, color: 'var(--accent-blue)', letterSpacing: '0.05em',
-        }}>
-          AI 파워드 공인중개사 도구
-        </div>
-        <h1 style={{ fontSize: '40px', fontWeight: 800, margin: '0 0 16px', lineHeight: 1.2 }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 800, margin: '0 0 12px', lineHeight: 1.2 }}>
           매물 URL 하나로 <br />
-          <span style={{ background: 'linear-gradient(135deg, #4f8ef7, #22d3a0)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <span style={{ color: 'var(--accent-blue)' }}>
             3종 콘텐츠를 자동 생성
           </span>
         </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '16px', margin: 0, lineHeight: 1.6 }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '15px', margin: 0, lineHeight: 1.6 }}>
           매물 설명 · 블로그/카페 홍보글 · 문자/단톡 문구<br />
-          10분이 걸리던 작업을 <strong style={{ color: 'var(--text-primary)' }}>2분</strong>으로 줄여드립니다
+          10분이 걸리던 작업을 2분으로 줄여드립니다
         </p>
       </div>
 
