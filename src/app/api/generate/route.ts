@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         // 3종 콘텐츠 생성
         content = await generatePropertyContent(propertyData);
 
-        // DB 저장 옵션
+        // DB 저장 옵션 (Vercel 등 SQLite 미지원 환경에서는 자동 스킵)
         if (saveToDb) {
             try {
                 const prisma = getPrisma();
@@ -42,10 +42,8 @@ export async function POST(req: Request) {
                     },
                 });
             } catch (dbError) {
-                console.error('Database storage failed:', dbError);
-                // DB 저장 실패 시 중첩 catch에서 처리하지 않고 
-                // 상위 catch로 던져서 fallback 로직이 실행되게 함
-                throw dbError;
+                // DB 저장 실패는 무시하고 콘텐츠는 항상 반환 (Vercel SQLite 미지원 대응)
+                console.warn('DB 저장 스킵 (SQLite 미지원 환경):', (dbError as Error).message);
             }
         }
 
