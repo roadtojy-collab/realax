@@ -6,7 +6,7 @@ import PropertyForm, { PropertyFormData } from '@/components/PropertyForm';
 import ContentDisplay from '@/components/ContentDisplay';
 import { ParsedProperty } from '@/lib/llm';
 
-type Step = 'INPUT' | 'GENERATING' | 'DONE';
+type Step = 'INPUT' | 'VERIFY' | 'GENERATING' | 'DONE';
 
 export default function Home() {
   const [step, setStep] = useState<Step>('INPUT');
@@ -14,7 +14,7 @@ export default function Home() {
   const [aiData, setAiData] = useState<ParsedProperty | null>(null);
   const [isAiFilled, setIsAiFilled] = useState(false);
   const [generatedContent, setGeneratedContent] = useState<{
-    description: string; blogContent: string; smsContent: string;
+    description: string; blogContent: string; smsContent: string; checklist: string;
   } | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generateError, setGenerateError] = useState<string | null>(null);
@@ -22,17 +22,17 @@ export default function Home() {
   const handleDataLoaded = (data: ParsedProperty) => {
     setAiData(data);
     setIsAiFilled(true);
-    setIsManualMode(true);
+    setStep('VERIFY');
   };
 
   const handleManualMode = () => {
-    setIsManualMode(true);
+    setStep('VERIFY');
     setIsAiFilled(false);
     setAiData(null);
   };
 
   const handleGenerate = async (formData: PropertyFormData) => {
-    setIsGenerating(true);
+    setStep('GENERATING');
     setGenerateError(null);
 
     const options = formData.options
@@ -71,14 +71,14 @@ export default function Home() {
       setStep('DONE');
     } catch (e) {
       setGenerateError((e as Error).message);
+      setStep('VERIFY'); // Fallback to verify step on error
     } finally {
-      setIsGenerating(false);
+      // Step already handled above
     }
   };
 
   const handleReset = () => {
     setStep('INPUT');
-    setIsManualMode(false);
     setIsAiFilled(false);
     setAiData(null);
     setGeneratedContent(null);
@@ -102,45 +102,46 @@ export default function Home() {
       </div>
 
       {/* 메인 카드 */}
-      {step !== 'DONE' && (
+      {(step === 'INPUT' || step === 'VERIFY' || step === 'GENERATING') && (
         <div className="glass-card" style={{ padding: '32px' }}>
 
-          {/* URL 임포터 (항상 표시) */}
-          {!isManualMode && (
-            <UrlImporter
-              onDataLoaded={handleDataLoaded}
-              onManualMode={handleManualMode}
-            />
-          )}
-
-          {/* 수동 입력 토글 */}
-          {!isManualMode && (
-            <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-              <button
-                onClick={handleManualMode}
-                style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', fontSize: '13px', cursor: 'pointer', textDecoration: 'underline' }}
-              >
-                직접 입력하기
-              </button>
-            </div>
-          )}
-
-          {/* 매물 등록 폼 */}
-          {isManualMode && (
+          {/* 1단계: URL 입력 또는 수동 시작 */}
+          {step === 'INPUT' && (
             <>
-              {!isAiFilled && (
+              <UrlImporter
+                onDataLoaded={handleDataLoaded}
+                onManualMode={handleManualMode}
+              />
+              <div style={{ textAlign: 'center', marginBottom: '8px' }}>
                 <button
-                  onClick={() => setIsManualMode(false)}
-                  style={{ background: 'none', border: 'none', color: 'var(--accent-blue)', fontSize: '13px', cursor: 'pointer', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                  onClick={handleManualMode}
+                  style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', fontSize: '13px', cursor: 'pointer', textDecoration: 'underline' }}
                 >
-                  ← URL로 불러오기
+                  직접 입력하기
                 </button>
-              )}
+              </div>
+            </>
+          )}
+
+          {/* 2단계: 정보 확인 및 수동 보정 */}
+          {(step === 'VERIFY' || step === 'GENERATING') && (
+            <>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                <button
+                  onClick={() => setStep('INPUT')}
+                  style={{ background: 'none', border: 'none', color: 'var(--accent-blue)', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                >
+                  ← 처음으로 돌아가기
+                </button>
+                <div style={{ fontSize: '12px', color: 'var(--accent-green)', fontWeight: 600 }}>
+                  {isAiFilled ? '✨ 정보 분석 완료 (검토 후 생성 버튼을 눌러주세요)' : '✍️ 정보를 직접 입력해 주세요'}
+                </div>
+              </div>
               <PropertyForm
                 initialData={aiData}
                 isAiFilled={isAiFilled}
                 onGenerate={handleGenerate}
-                isGenerating={isGenerating}
+                isGenerating={step === 'GENERATING'}
               />
               {generateError && (
                 <p style={{ color: '#f87171', fontSize: '13px', marginTop: '12px', textAlign: 'center' }}>
